@@ -100,12 +100,8 @@
                     noButton.addEventListener("click", function() {
                         const newX = Math.random() * (window.innerWidth - 100);
                         const newY = Math.random() * (window.innerHeight - 100);
-                        questionButton.style.left = `${newX}px`;
-                        questionButton.style.top = `${newY}px`;
                         noButton.style.left = `${newX}px`;
                         noButton.style.top = `${newY}px`;
-                        questionDiv.textContent = "";
-                        askQuestion();
                     });
                 } else {
                     displayFinalMessage();
