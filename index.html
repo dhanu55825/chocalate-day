@@ -36,7 +36,7 @@
             margin-top: 50px;
             position: relative;
         }
-        .move-button, .choco-button {
+        .move-button, .choco-button, .no-button {
             padding: 10px 20px;
             font-size: 18px;
             background-color: #8B4513;
@@ -86,6 +86,7 @@
                     const noButton = document.createElement("button");
                     noButton.textContent = "No";
                     noButton.style.margin = "10px";
+                    noButton.classList.add("no-button");
                     
                     questionDiv.appendChild(yesButton);
                     questionDiv.appendChild(noButton);
@@ -101,6 +102,8 @@
                         const newY = Math.random() * (window.innerHeight - 100);
                         questionButton.style.left = `${newX}px`;
                         questionButton.style.top = `${newY}px`;
+                        noButton.style.left = `${newX}px`;
+                        noButton.style.top = `${newY}px`;
                         questionDiv.textContent = "";
                         askQuestion();
                     });
