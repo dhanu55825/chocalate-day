@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Day for Pumpkin</title>
+    <style>
+        body {
+            background-color: #ffcccb;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            color: #8B4513;
+        }
+        p {
+            font-size: 20px;
+            color: #5A2D0C;
+        }
+        .chocolate {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #8B4513;
+            border-radius: 50%;
+            box-shadow: 2px 2px 5px #5A2D0C;
+            animation: floatChocolates 5s linear infinite;
+            display: none;
+        }
+        @keyframes floatChocolates {
+            0% { transform: translateY(100vh); }
+            100% { transform: translateY(-10vh); }
+        }
+        .button-container {
+            margin-top: 50px;
+            position: relative;
+        }
+        .move-button, .choco-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+        }
+        .question {
+            margin-top: 20px;
+            font-size: 22px;
+            color: #8B4513;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Chocolate Day, Pumpkin! 🍫</h1>
+    <p>You are sweeter than the finest chocolate and more precious than gold. Wishing you a day filled with love and sweetness! ❤️</p>
+    
+    <div class="button-container">
+        <button class="move-button" id="questionButton">Click for a Chocolate Surprise! 🍫</button>
+    </div>
+    <div class="question" id="question"></div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const questionButton = document.getElementById("questionButton");
+            const questionDiv = document.getElementById("question");
+            const questions = [
+                "Do you love chocolates?",
+                "Do you think I'm sweet?",
+                "Do you want a hug?",
+                "Are you happy today?"
+            ];
+            let currentQuestionIndex = 0;
+            
+            questionButton.style.top = "50vh";
+            questionButton.style.left = "50vw";
+            
+            function askQuestion() {
+                if (currentQuestionIndex < questions.length) {
+                    questionDiv.textContent = questions[currentQuestionIndex];
+                    const yesButton = document.createElement("button");
+                    yesButton.textContent = "Yes";
+                    yesButton.style.margin = "10px";
+                    const noButton = document.createElement("button");
+                    noButton.textContent = "No";
+                    noButton.style.margin = "10px";
+                    
+                    questionDiv.appendChild(yesButton);
+                    questionDiv.appendChild(noButton);
+                    
+                    yesButton.addEventListener("click", function() {
+                        alert("Yay! 😊");
+                        questionDiv.textContent = "";
+                        currentQuestionIndex++;
+                        askQuestion();
+                    });
+                    noButton.addEventListener("click", function() {
+                        const newX = Math.random() * (window.innerWidth - 100);
+                        const newY = Math.random() * (window.innerHeight - 100);
+                        questionButton.style.left = `${newX}px`;
+                        questionButton.style.top = `${newY}px`;
+                        questionDiv.textContent = "";
+                        askQuestion();
+                    });
+                } else {
+                    displayFinalMessage();
+                }
+            }
+            
+            questionButton.addEventListener("click", askQuestion);
+            
+            function displayFinalMessage() {
+                questionDiv.innerHTML = "<p>Sweetest chocolate for my sweetest person! 🍫</p>";
+                const chocoButton = document.createElement("button");
+                chocoButton.textContent = "Take Chocolate!";
+                chocoButton.classList.add("choco-button");
+                questionDiv.appendChild(chocoButton);
+                
+                chocoButton.addEventListener("click", function() {
+                    const newX = Math.random() * (window.innerWidth - 100);
+                    const newY = Math.random() * (window.innerHeight - 100);
+                    chocoButton.style.left = `${newX}px`;
+                    chocoButton.style.top = `${newY}px`;
+                });
+            }
+        });
+        
+        function createChocolates() {
+            for (let i = 0; i < 10; i++) {
+                let choco = document.createElement("div");
+                choco.classList.add("chocolate");
+                choco.style.left = Math.random() * window.innerWidth + "px";
+                choco.style.display = "block";
+                document.body.appendChild(choco);
+            }
+        }
+    </script>
+</body>
+</html>
